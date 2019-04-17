@@ -1,4 +1,4 @@
-# Alghorithms-JS
+# Algorithms-JS
 Algorithms and data structures in Javascript
 
 
