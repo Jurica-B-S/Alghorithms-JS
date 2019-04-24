@@ -1,4 +1,6 @@
 //graph class implementation using an MAP + breadth search alghorithm
+//hash table of nodes + values to be searched is passed as a paramether to a graph function while creating graph
+
 class Graph extends Map{
   constructor(){
     super();
