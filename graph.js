@@ -6,11 +6,14 @@ class Graph extends Map{
     super();
     this._graph_values = new Map();
   }
-  search(starting_node){
+  //node_name - name of the node used for getting the data of connected nodes
+  //nodes_connected - array of modes that are connected to the node
+  add_node(node_name, nodes_connected){
+    this._graph_values.set(node_name, nodes_connected);
+  }
+  search(starting_node, hash_table){
     //implementation of breadth first search alghorithm - arrays are used for queue
-    //if element found returns an object {'steps':,'element':}
-    //steps - minimum distance
-    //element - returns the node that has the searched info
+    //hash_table of node objects - keys are matched with objects
     let queue = [];
     let already_searched_nodes = new Set();
     let current_node = starting_node;
@@ -25,10 +28,15 @@ class Graph extends Map{
       queue.push(this._graph_values[current_node]);
       while(queue.size > 0){
          current_node = queue[0];
-          if(current_node.search_key === search_string){
+          if(current_node.car_dealer === true){
             return queue_element;
         }
-        queue.push(this._graph_values[current_node])
+        console.log("Blabla34", already_searched_nodes.has(current_node))
+        if(!already_searched_nodes.has(current_node)){
+          queue.push(this._graph_values[current_node])
+          already_searched_nodes.add(current_node);
+        }
+        queue.unshift();
       }
 
 
@@ -42,6 +50,16 @@ class Graph extends Map{
   }
 }
 
-
+let b = new Map();
+b.set("Jura",{"car_dealer":false})
+b.set("Pero",{"car_dealer":false})
+b.set("Joža",{"car_dealer":false})
+b.set("Konj",{"car_dealer":true})
+b.set("Ivan",{"car_dealer":true})
 let a= new Graph(); 
-a.search();
+a.add_node("Jura",["Pero", "Joža", "Konj"]);
+a.add_node("Pero",[]);
+a.add_node("Joža",["Ivan", "Pero", "Konj"]);
+a.add_node("Konj",["Ivan","Joža"]);
+a.add_node("Ivan",[]);
+a.search("Jura");
