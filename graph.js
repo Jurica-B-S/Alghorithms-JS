@@ -18,25 +18,29 @@ class Graph extends Map{
     let already_searched_nodes = new Set();
     let current_node = starting_node;
     let steps_to_find_node = 0;
-
+    console.log("Blabla34", hash_table);
     try{
       
       if(this._graph_values.size === 0){
         console.log("blabla");
         throw new Error("graphEmpty")
       }
-      queue.push(this._graph_values[current_node]);
-      while(queue.size > 0){
+      console.log('1: ',this._graph_values.get(current_node));
+      queue.push(...this._graph_values.get(current_node));
+      while(queue.length > 0){
          current_node = queue[0];
-          if(current_node.car_dealer === true){
-            return queue_element;
+         if(hash_table.get(current_node).car_dealer === true){
+            return current_node;
         }
-        console.log("Blabla34", already_searched_nodes.has(current_node))
+        console.log("Blabla34", current_node);
+        console.log("Blabla34", (this._graph_values.get(current_node)));
         if(!already_searched_nodes.has(current_node)){
-          queue.push(this._graph_values[current_node])
+          queue.push(...(this._graph_values.get(current_node)));
           already_searched_nodes.add(current_node);
         }
-        queue.unshift();
+        console.log(queue);
+        queue.shift();
+         console.log(queue);
       }
 
 
@@ -62,4 +66,4 @@ a.add_node("Pero",[]);
 a.add_node("Joža",["Ivan", "Pero", "Konj"]);
 a.add_node("Konj",["Ivan","Joža"]);
 a.add_node("Ivan",[]);
-a.search("Jura");
+a.search("Jura", b);
